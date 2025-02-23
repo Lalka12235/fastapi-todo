@@ -3,6 +3,3 @@ TODO с авторизацией,сохранением заметок в фай
 '''
 
 from fastapi import FastAPI
-
-app = FastAPI()
-
