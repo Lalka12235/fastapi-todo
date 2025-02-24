@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from typing import Annotated
 from data.pydantic_model_task import Task
 
@@ -6,11 +6,11 @@ router = APIRouter()
 
 tasks = {}
 
-User_id_dep = Annotated[str, None]
-Task_id_dep = Annotated[str,None]
+User_id = Annotated[str, None]
+Task_id = Annotated[str,None]
 
 @router.get('/tasks/{user_id}')
-async def get_all_task(user_id: User_id_dep):
+async def get_all_task(user_id: User_id):
     if user_id in tasks:
         task_temp = tasks.get(user_id)
         return task_temp
@@ -18,14 +18,14 @@ async def get_all_task(user_id: User_id_dep):
 
 
 @router.get('/tasks/{user_id}/{task_id}')
-async def get_task(user_id: User_id_dep,task_id: Task_id_dep) -> Task:
+async def get_task(user_id: User_id,task_id: Task_id) -> Task:
     if user_id in tasks:
         task_temp = tasks.get(user_id)
         return task_temp[task_id]
     return {'user_id' : 'Not found'}
 
 @router.post('/tasks/{user_id}')
-async def create_task(task: Task, user_id: User_id_dep,task_id: Task_id_dep):
+async def create_task(task: Task, user_id: User_id,task_id: Task_id):
     if task:
         tasks.update({user_id: {task_id: task}})
         return {'Create task' : True,user_id: tasks[user_id]}
@@ -33,7 +33,7 @@ async def create_task(task: Task, user_id: User_id_dep,task_id: Task_id_dep):
 
 
 @router.put('/tasks/{user_id}/{task_id}')
-async def update_task(task: Task, user_id: User_id_dep,task_id: Task_id_dep):
+async def update_task(task: Task, user_id: User_id,task_id: Task_id):
     if user_id in tasks:
         tasks.update({user_id: {task_id: task}})
         return tasks
@@ -41,7 +41,7 @@ async def update_task(task: Task, user_id: User_id_dep,task_id: Task_id_dep):
 
 
 @router.delete('/tasks/{user_id}/{task_id}')
-async def delete_task(user_id: User_id_dep,task_id: Task_id_dep):
+async def delete_task(user_id: User_id,task_id: Task_id):
     if user_id in tasks:
         delete = tasks.get(user_id)
         del delete[task_id]
