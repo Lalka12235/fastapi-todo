@@ -7,5 +7,5 @@ print(lst)
 dictionart = {}
 dictionart.update({'Task': 'Task'})
 print(dictionart)
-dictionart.update({'Task': 'Task1'})
+dictionart.update({'Task1': 'Task1'})
 print(dictionart)

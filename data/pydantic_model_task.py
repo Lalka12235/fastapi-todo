@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 class Task(BaseModel): # Мейби добавить примеры 
-    task_id: int
     title: str
     description: str | None = None
     check: bool = False
