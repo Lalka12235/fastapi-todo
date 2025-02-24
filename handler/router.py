@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from typing import Annotated
 from data.pydantic_model_task import Task
 
@@ -6,8 +6,11 @@ router = APIRouter()
 
 tasks = {}
 
+User_id_dep = Annotated[str, None]
+Task_id_dep = Annotated[str,None]
+
 @router.get('/tasks/{user_id}')
-async def get_all_task(user_id: Annotated[str, None]):
+async def get_all_task(user_id: User_id_dep):
     if user_id in tasks:
         task_temp = tasks.get(user_id)
         return task_temp
@@ -15,14 +18,14 @@ async def get_all_task(user_id: Annotated[str, None]):
 
 
 @router.get('/tasks/{user_id}/{task_id}')
-async def get_task(user_id: Annotated[str, None],task_id: Annotated[str,None]) -> Task:
+async def get_task(user_id: User_id_dep,task_id: Task_id_dep) -> Task:
     if user_id in tasks:
         task_temp = tasks.get(user_id)
         return task_temp[task_id]
     return {'user_id' : 'Not found'}
 
 @router.post('/tasks/{user_id}')
-async def create_task(task: Task, user_id: Annotated[str, None],task_id: Annotated[str,None]):
+async def create_task(task: Task, user_id: User_id_dep,task_id: Task_id_dep):
     if task:
         tasks.update({user_id: {task_id: task}})
         return {'Create task' : True,user_id: tasks[user_id]}
@@ -30,7 +33,7 @@ async def create_task(task: Task, user_id: Annotated[str, None],task_id: Annotat
 
 
 @router.put('/tasks/{user_id}/{task_id}')
-async def update_task(task: Task, user_id: Annotated[str, None],task_id: Annotated[str,None]):
+async def update_task(task: Task, user_id: User_id_dep,task_id: Task_id_dep):
     if user_id in tasks:
         tasks.update({user_id: {task_id: task}})
         return tasks
@@ -38,7 +41,7 @@ async def update_task(task: Task, user_id: Annotated[str, None],task_id: Annotat
 
 
 @router.delete('/tasks/{user_id}/{task_id}')
-async def delete_task(user_id: Annotated[str, None],task_id: Annotated[str,None]):
+async def delete_task(user_id: User_id_dep,task_id: Task_id_dep):
     if user_id in tasks:
         delete = tasks.get(user_id)
         del delete[task_id]
