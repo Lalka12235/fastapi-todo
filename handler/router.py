@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from typing import Annotated
 from data.pydantic_model_task import Task
+from handler.auth import *
 
 router = APIRouter()
 
