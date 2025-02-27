@@ -1,7 +1,13 @@
 ## Deployment
 
-To deploy this project run
 
+Build
 ```bash
-  fastapi dev main.py
+  docker build -t fastapi-todo .
+
+```
+Run
+```bash
+  docker run -d -p 8000:80 fastapi-todo
+
 ```
