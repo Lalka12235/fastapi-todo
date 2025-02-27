@@ -1,5 +1,5 @@
 import sqlite3 as sq
-from data.pydantic_model_task import Task  
+from app.data.pydantic_model_task import Task  
 
 
 def get_task_db(db, username,task_id):

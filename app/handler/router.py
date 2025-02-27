@@ -1,13 +1,13 @@
 from fastapi import APIRouter
 from typing import Annotated
-from data.pydantic_model_task import Task
-from db.create_db import create_db
-from db.work_db import get_all_task_db,get_task_db,create_task_db,update_task_db,delete_task_db
+from app.data.pydantic_model_task import Task
+from app.db.create_db import create_db
+from app.db.work_db import get_all_task_db,get_task_db,create_task_db,update_task_db,delete_task_db
 
 import os
 
 router = APIRouter()
-path_to_db = 'db/tasks.db'
+path_to_db = 'app/db/tasks.db'
 #Create db
 if os.path.exists(path_to_db):
     pass

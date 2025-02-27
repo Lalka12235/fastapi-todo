@@ -1,1 +1,0 @@
-from data.pydantic_model_task import *
