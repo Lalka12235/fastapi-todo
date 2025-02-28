@@ -1,10 +1,8 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
 from main import app
-from app.db.create_db import create_db
-import sqlite3 as sq
-from app.data.pydantic_model_task import Task
 
+#data for test
 @pytest.fixture
 def test_task_for_create():
     return {
@@ -20,6 +18,7 @@ def test_task_for_update():
         'description': 'make test on pytest',
         'check': True,
     }
+
 
 @pytest.mark.asyncio
 async def test_get_all_task():
@@ -50,7 +49,7 @@ async def test_create_task(test_task_for_create):
 @pytest.mark.asyncio
 async def test_update_task(test_task_for_update):
     async with AsyncClient(transport=ASGITransport(app), base_url='http://test') as ac:
-        response = await ac.post('/tasks/{user_id}/{task_id}')
+        response = await ac.put('/tasks/{user_id}/{task_id}')
         data = {'Task': test_task_for_update}
         print(data)
         assert data
