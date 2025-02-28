@@ -13,7 +13,7 @@ Run
 ```
 Run test 
 ```bash
-  pytest -vs
+  pytest tests/test_api.py::TestApi
 
 ```
 
