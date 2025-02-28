@@ -40,7 +40,7 @@ async def get_task(user_id: User_id,task_id: Task_id):
     return {'user_id' : 'Not found'}
 
 @router.post('/tasks/{user_id}')
-async def create_task(task: Task, user_id: User_id,): # task_id: Task_id
+async def create_task(task: Task, user_id: User_id,): 
     creation = create_task_db(path_to_db,user_id,task)
     return {'Create task' : True}
 

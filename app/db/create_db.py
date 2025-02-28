@@ -1,7 +1,7 @@
 import sqlite3 as sq
 
 def create_db():
-    with sq.connect('db/tasks.db') as con:
+    with sq.connect('app/db/tasks.db') as con:
             cur = con.cursor()
 
             cur.execute("""CREATE TABLE IF NOT EXISTS tasks (
@@ -15,6 +15,6 @@ def create_db():
 
             con.commit()
             cur.close()
-
+    return con 
 if __name__ == '__main__':
       create_db()
