@@ -11,3 +11,9 @@ Run
   docker run -d -p 8000:80 fastapi-todo
 
 ```
+Run test 
+```bash
+  pytest -vs
+
+```
+
