@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.handler.router import  router
 import uvicorn
+from app.db.work_db import Base
 
 app = FastAPI()
 
